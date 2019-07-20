@@ -1,14 +1,16 @@
-/* Step 1: using axios, send a GET request to the following URL 
-           (replacing the palceholder with your Github name):
-           https://api.github.com/users/<your name>
-*/
+// //* Step 1: using axios, send a GET request to the following URL 
+//            (replacing the palceholder with your Github name):
+//            https://api.github.com/users/<your name>
+// *//
 
-/* Step 2: Inspect and study the data coming back, this is YOUR 
-   github info! You will need to understand the structure of this 
-   data in order to use it to build your component function 
+const getCards = axios.get("https://api.github.com/users/nyomilm")
 
-   Skip to Step 3.
-*/
+// //* Step 2: Inspect and study the data coming back, this is YOUR 
+//    github info! You will need to understand the structure of this 
+//    data in order to use it to build your component function 
+
+//    Skip to Step 3.
+// *//
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
@@ -24,7 +26,112 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+function myCard(followers) {
+  
+  let card = document.createElement('div');
+  //console.log(card)
+  card.classList.add('card');
+
+  let img = document.createElement('img');
+  img.src = followers.avatar_url;
+  card.appendChild(img);
+
+  let cardInfo = document.createElement('div');
+  cardInfo.classList.add('card-info');
+  card.appendChild(cardInfo);
+
+  let h3 = document.createElement('h3');
+  h3.classList.add('name');
+  h3.textContent = followers.name
+  cardInfo.appendChild(h3);
+
+  let anchor = document.createElement('a');
+  anchor.textContent = followers.following_url;
+
+  let firstParagraph = document.createElement('p');
+  firstParagraph.classList.add('username');
+  firstParagraph.textContent = followers.login;
+  cardInfo.appendChild(firstParagraph);
+  
+  let secondParagraph = document.createElement('p');
+  secondParagraph.textContent = `Location: ${followers.location}`;
+  cardInfo.appendChild(secondParagraph);
+
+  let thirdParagraph = document.createElement('p');
+  thirdParagraph.textContent = `Profile: <a href=${followers.html_url}>${followers.html_url}</a>`;
+  cardInfo.appendChild(thirdParagraph);
+
+  let fourthParagraph = document.createElement('p');
+  fourthParagraph.textContent = `Followers: ${followers.followers}`;
+  cardInfo.appendChild(fourthParagraph);
+
+  let fifthParagraph = document.createElement('p');
+  fifthParagraph.textContent = `Following: ${followers.following}`;
+  cardInfo.appendChild(fifthParagraph);
+
+  let sixthParagraph = document.createElement('p');
+  sixthParagraph.textContent = `Bio: ${followers.bio}`;
+  cardInfo.appendChild(sixthParagraph);
+
+  //console.log(card)
+  return card;
+}
+
+axios.get("https://api.github.com/users/Amybarba")
+  .then((github) => {
+    console.log(github.data)
+    let cards = document.querySelector('.cards');
+    cards.appendChild(myCard(github.data))
+  })
+
+axios.get(`https://api.github.com/users/nyomilm`)
+  .then((github) => {
+    console.log(github.data)
+    let cards = document.querySelector('.cards');
+    cards.appendChild(myCard(github.data))
+  })
+
+  
+  axios.get("https://api.github.com/users/tetondan")
+  .then((github) => {
+    console.log(github.data)
+    let cards = document.querySelector('.cards');
+    cards.appendChild(myCard(github.data))
+  })
+
+  axios.get("https://api.github.com/users/dustinmyers")
+  .then((github) => {
+    console.log(github.data)
+    let cards = document.querySelector('.cards');
+    cards.appendChild(myCard(github.data))
+  })
+
+  axios.get("https://api.github.com/users/justsml")
+  .then((github) => {
+    console.log(github.data)
+    let cards = document.querySelector('.cards');
+    cards.appendChild(myCard(github.data))
+  })
+
+  axios.get("https://api.github.com/users/bigknell")
+  .then((github) => {
+    console.log(github.data)
+    let cards = document.querySelector('.cards');
+    cards.appendChild(myCard(github.data))
+  })
+
+  .catch((err) => {
+    console.log('error: ', err);
+  })
+
+  
+
+
+
+
+
+
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -53,3 +160,4 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
